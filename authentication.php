@@ -17,7 +17,7 @@
 		if($row != 0)
         {
             session_start();
-			$_SESSION['code']=$user->code;
+			$_SESSION['code_usuario']=$user->code;
             $_SESSION['login']=$user->login;
             $_SESSION['senha']=$user->senha;
 			$_SESSION['nome_grupo']=$user->nome_grupo;

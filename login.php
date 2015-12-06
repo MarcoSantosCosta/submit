@@ -8,6 +8,23 @@
 <title>SUBMIT</title>
 </head>
 <body>
+<ol>
+    <li><p>Acesso Livre</p></br>
+    	<ul>
+            <li><a href="login.php">Login</a></li>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="provas.php">Provas</a></li>
+           
+        </ul>
+    </li>
+	<li><p></p>Acesso Restrito</br>
+    	<ul>
+    	 	<li><a href="cadastro_prova.php">Cadastro Provas</a></li>
+            <li><a href="cadastro_questoes.php">Cadastro Questões</a></li>
+            <li><a href="cadastro_usuario.php">Cadastro Usuarios</a></li>
+    	</ul>
+    </li>
+</ol></br>
 
 	<form name="login" method="post" action="authentication.php">
     	<label>Login: </label>

@@ -7,31 +7,50 @@
 			$senha_prova=$_POST["senha_prova"];
    			$data_prova=$_POST["ano"].$_POST["mes"].$_POST["dia"];
 			$hora_inicio=$_POST["hora_inicio"];	
-			$duracao=$_POST["duracao"];
-			$insert_provas="INSERT into  provas values(null,'$senha_prova','$data_prova','$hora_inicio','$duracao')";
-			mysqli_query($conexao,$insert_provas);
+			$hora_fim=$_POST["hora_fim"];
+			$insert_provas="INSERT into  provas values(null,'$senha_prova','$data_prova','$hora_inicio','$hora_fim',1)";
+			if(mysqli_query($conexao,$insert_provas))
+			{
+				header("Location: cadastro_prova.php");
+				exit;
+			}else{
+				echo"Deu bosta";
+			}
 		break;
-		case 2:
+		case 2://Cadastros questões
 			$senha_prova=$_POST["senha_prova"];
 			$enunciado=$_POST["enunciado"];
 			$exemplo_in=$_POST["exemplo_in"];
 			$exemplo_out=$_POST["exemplo_out"]; 
 			$select="SELECT code from provas WHERE senha = '$senha_prova'";
 			$sql=mysqli_query($conexao,$select);
-			$row=$sql-> fetch_object();
-			$code_prova=$row->code;				
-			echo"Code prova: $code_prova Senha prova: $senha_prova";
-			$insert_qustoes="INSERT into  questoes values(null,'$code_prova','$enunciado','$exemplo_in','$exemplo_out')";
-			mysqli_query($conexao,$insert_qustoes);	
+			$prova=$sql->fetch_object();
+			$row=mysqli_num_rows($sql);
+			if($row !=0)
+			{
+				$code_prova=$prova->code;				
+				echo"Code prova: $code_prova Senha prova: $senha_prova";
+				$insert_questoes="INSERT into  questoes values(null,'$code_prova','$enunciado','$exemplo_in','$exemplo_out')";
+				mysqli_query($conexao,$insert_questoes);			
+				header("Location: cadastro_questoes.php");
+			}else{
+				echo"senha inesistente";
+			}
 		break;
-		case 3:
+		case 3://Cadastros Usuarios
 			$login=$_POST["login"];
 			$password=$_POST["password"];
 			$membros=$_POST["membros"];
 			$nome_grupo=$_POST["nome_grupo"];
       		$insert_usuarios="INSERT into usuarios values(null,'$login','$password','$nome_grupo','$membros',1)";
-			mysqli_query($conexao,$insert_usuarios);
+			if(mysqli_query($conexao,$insert_usuarios))
+			{
+					header("Location: cadastro_prova.php");
+			}
 		break; 
+		default:
+			echo"deu merda";
+		break;
 			
 	}
 ?>

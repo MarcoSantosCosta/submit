@@ -9,7 +9,7 @@
 	}	
 	if($permicao < $permicao_pagina)
 	{
-		echo"Nivel";
+		echo"Acesso restrito Sua permicao: $permicao Permicao requerida: $permicao_pagina";	
 		//header("Location: login.php");
 		exit;
 	}
