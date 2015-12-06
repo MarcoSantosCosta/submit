@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 06-Dez-2015 às 03:30
+-- Generation Time: 06-Dez-2015 às 17:58
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -31,11 +31,21 @@ CREATE TABLE IF NOT EXISTS `envios` (
   `chave_usuario` int(11) NOT NULL,
   `chave_prova` int(11) NOT NULL,
   `chave_questao` int(11) NOT NULL,
+  `envio` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `numero_envio` int(11) NOT NULL,
   `hora_envio` time NOT NULL,
   `nota` int(11) NOT NULL,
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+
+--
+-- Extraindo dados da tabela `envios`
+--
+
+INSERT INTO `envios` (`code`, `chave_usuario`, `chave_prova`, `chave_questao`, `envio`, `numero_envio`, `hora_envio`, `nota`) VALUES
+(17, 1, 25, 15, 'Teste:1\r\nEnvio:1 \r\nQuestÃ£o:1', 1, '03:36:01', 2),
+(18, 1, 25, 16, 'Teste:1\r\nEnvio:1 \r\nQuestÃ£o:2', 1, '03:36:10', 1),
+(19, 1, 25, 17, 'Teste:1\r\nEnvio:1 \r\nQuestÃ£o:3', 1, '03:36:19', 0);
 
 -- --------------------------------------------------------
 
@@ -51,15 +61,14 @@ CREATE TABLE IF NOT EXISTS `provas` (
   `hora_fim` time NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Extraindo dados da tabela `provas`
 --
 
 INSERT INTO `provas` (`code`, `senha`, `data`, `hora_inicio`, `hora_fim`, `status`) VALUES
-(23, 'ABCD', '2015-12-05', '22:00:00', '00:00:00', 1),
-(24, 'BCD', '2015-12-06', '00:01:00', '00:00:00', 1);
+(25, 'ABCD', '2015-12-06', '00:01:00', '00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -74,19 +83,16 @@ CREATE TABLE IF NOT EXISTS `questoes` (
   `exemplo_entrada` char(25) NOT NULL,
   `exemplo_saida` char(25) NOT NULL,
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Extraindo dados da tabela `questoes`
 --
 
 INSERT INTO `questoes` (`code`, `chave_prova`, `enunciado`, `exemplo_entrada`, `exemplo_saida`) VALUES
-(4, 23, 'Enunciado1', '5', '20'),
-(5, 23, 'Enunciado2', '20', '5'),
-(10, 23, 'Enunciado3', '15', '20'),
-(11, 24, 'Enunciado 1', '20', '25'),
-(13, 24, 'Enunciado 1', '20', '25'),
-(14, 24, 'Enunciado 1', '20', '25');
+(15, 25, 'Enunciado 1', '1', '2'),
+(16, 25, 'Enunciado 2', '2', '3'),
+(17, 25, 'Enunciado 3', '3', '4');
 
 -- --------------------------------------------------------
 
@@ -102,22 +108,16 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `membros` varchar(550) NOT NULL,
   `permicao` int(11) NOT NULL,
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`code`, `login`, `senha`, `nome_grupo`, `membros`, `permicao`) VALUES
-(1, 'marcocosta', 'Natalia<3', '', '', 2),
-(3, '1', '', 'awdw', '', 1),
-(4, 'Teste1', '123', 'TestÃ£o', '', 1),
-(5, 'Teste1', '123', 'TestÃ£o', '', 1),
-(6, 'Teste2', '123', 'TESTTTT', 'membro1,membro2', 1),
-(7, 'marco', '123', 'joao', '', 1),
-(8, 'Marco', '123', '', 'Membro1,membro2membros', 1),
-(9, 'user1', '1', 'USB', 'membros,membros,membros e mais membros', 1),
-(10, 'user1', '1', 'USB', 'membros,membros,membros e mais membros', 1);
+(1, 'marcocosta', 'Natalia<3', '', '', 5),
+(11, 'Sudo', 'root', 'Grupo Teste 1', 'Membro 1, Membro 2 e Membro 3', 3),
+(12, 'UserComum', 'user', 'GrupoComum', 'Membro1,Membro2 e Membro 3', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
