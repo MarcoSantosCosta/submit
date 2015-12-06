@@ -4,8 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
 <?php
-	$permicao_pagina=2;
-	include('security.php');
+	
 ?>
 </head>
 <body>

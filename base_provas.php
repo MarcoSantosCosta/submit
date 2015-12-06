@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>SUBMIT</title>
+<script type="text/javascript" src="js/result.js"></script>
 </head>
 <body>
 <h1>Base Provas</h1>
@@ -25,41 +26,41 @@
     	</ul>
     </li>
 </ol>
+<div id="result">
+Aqui estão as notas:
+</div>
 <?php
 	$permicao_pagina=0;
 	include('security.php');
 	include('conect.php');	
 	$code_prova = $_SESSION['code_prova'];
-	$senha_prova = $_SESSION['senha_prova'];
-	$data_prova = $_SESSION['data'];
-	$hora_inicio = $_SESSION['hora_inicio'];
-	$hora_fim = $_SESSION['hora_fim'];
-	$status = $_SESSION['status'];
-	$code_usuario = $_SESSION['code_usuario'];
 	$select="SELECT * from questoes WHERE chave_prova = $code_prova";
 	$sql=mysqli_query($conexao,$select);
 	$cont=0;
 	while($questao=$sql->fetch_object())
 	{
-		$code_questoes[10]=0;
-		$code_questoes[$cont]=$questao->code;
+		$vetor_questoes[$cont]=$questao->code;
 		$cont++;
 		echo"<strong>$cont.</strong> $questao->enunciado <br>
-		<strong>Exemplo de entrada:</strong> <br>
-		$questao->exemplo_entrada <br>
-		<strong>Exemploe de saida:</strong> <br>
-		$questao->exemplo_saida<br> 
-		<form name='envio_questao' method='post' action='recebe_questao.php'>
-			<input type='hidden' name='code_usuario' value='$code_usuario'>
-			<input type='hidden' name='code_prova' value='$code_prova'>
-			<input type='hidden' name='code_prova' value=''>
-			
-			<input type='text' name='qustao.php'>
-			</input>
-			<input type='submit' value='Enviar'>
-		</form>
-		";	
+		<strong>Exemplo de entrada:</strong>
+		$questao->exemplo_entrada<br>
+		<strong>Exemploe de saida:</strong>
+		$questao->exemplo_saida<br><br>";
 	}
+	$_SESSION['vetor_questoes']=$vetor_questoes;
 ?>
+<form name='envio_questao' method='post' action='submeter_questao.php'>
+	<select name='posicao_questao'>	
+		<?php 
+			for($i=1; $i <= $cont; $i++)
+			{
+				echo "$i";
+				echo"<option value='$i'>$i</option>";
+			}?>
+	</select>
+   <textarea name='questao' cols='75' rows='10'></textarea>
+  </input>
+	<input type='submit' value='Enviar'>
+</form>
 </body>
 </html>
