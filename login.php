@@ -22,11 +22,12 @@
     	 	<li><a href="cadastro_prova.php">Cadastro Provas</a></li>
             <li><a href="cadastro_questoes.php">Cadastro Questões</a></li>
             <li><a href="cadastro_usuario.php">Cadastro Usuarios</a></li>
+            <li><a href="corretor.php">Corretor</a></li>
     	</ul>
     </li>
 </ol></br>
 
-	<form name="login" method="post" action="authentication.php">
+	<form name="login" method="post" action="autenticacao_usuario.php">
     	<label>Login: </label>
 		<input type="text" name="login"></br>
         <label>Senha: </label>

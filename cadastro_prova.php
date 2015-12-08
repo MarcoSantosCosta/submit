@@ -5,7 +5,7 @@
 <title>Untitled Document</title>
 <?php
 	$permicao_pagina=2;
-	include('security.php');
+	include('seguranca.php');
 ?>
 </head>
 <body>
@@ -24,6 +24,7 @@
     	 	<li><a href="cadastro_prova.php">Cadastro Provas</a></li>
             <li><a href="cadastro_questoes.php">Cadastro Questões</a></li>
             <li><a href="cadastro_usuario.php">Cadastro Usuarios</a></li>
+			<li><a href="corretor.php">Corretor</a></li>
     	</ul>
     </li>
 </ol></br>
@@ -36,6 +37,8 @@
     <input type="text" name="dia" size="1" maxlength="2"> /
     <input type="text" name="mes" size="1" maxlength="2"> /
     <input type="text" name="ano" size="4" maxlength="4"></br>
+    <label>Quantidade de Questões: </label>
+    <input type="text" name="qtd_questoes"><br>
     <label>Hora Inicio:</label>
     <input type="text" name="hora_inicio"></br>
     <label>Hora Fim: </label>

@@ -20,12 +20,13 @@
     	 	<li><a href="cadastro_prova.php">Cadastro Provas</a></li>
             <li><a href="cadastro_questoes.php">Cadastro Questões</a></li>
             <li><a href="cadastro_usuario.php">Cadastro Usuarios</a></li>
+            <li><a href="corretor.php">Corretor</a></li>
     	</ul>
     </li>
 </ol>
 	<?php
 	$permicao_pagina=1;
-    include('security.php');
+    include('seguranca.php');
 	include('conect.php');
 	date_default_timezone_set('America/Sao_Paulo');
 	$date = date('Y-m-d');
@@ -48,7 +49,7 @@
 			if($time > $hora_inicio)
 			{		
 				echo"Prova numer: $prova->code<br>
-				<form name='valida_prova' method='post' action='valida_prova.php'>
+				<form name='valida_prova' method='post' action='autenticacao_prova.php'>
 					<label>Digite a senha para acessar: </label>
 					<input type='text' name='senha_prova'>
 					<input type='hidden' name='code_prova' value='$prova->code'>

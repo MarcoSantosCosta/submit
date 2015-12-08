@@ -1,14 +1,18 @@
 <?php
-	include("conect.php");
-	$code = $_POST["code"];
+	include("conect.php");	
+	$code=$_POST['code'];
 	switch($code)
 	{
-		case 1:
+		case 0:
+			echo"Você não deveria estar aqui!";
+		break;
+		case 1://Cadastros provas
 			$senha_prova=$_POST["senha_prova"];
+			$qtd_questoes=$_POST["qtd_questoes"];
    			$data_prova=$_POST["ano"].$_POST["mes"].$_POST["dia"];
 			$hora_inicio=$_POST["hora_inicio"];	
 			$hora_fim=$_POST["hora_fim"];
-			$insert_provas="INSERT into  provas values(null,'$senha_prova','$data_prova','$hora_inicio','$hora_fim',1)";
+			$insert_provas="INSERT into  provas values(null,'$senha_prova',$qtd_questoes,'$data_prova','$hora_inicio','$hora_fim',1)";
 			if(mysqli_query($conexao,$insert_provas))
 			{
 				header("Location: cadastro_prova.php");
@@ -45,7 +49,7 @@
       		$insert_usuarios="INSERT into usuarios values(null,'$login','$password','$nome_grupo','$membros',1)";
 			if(mysqli_query($conexao,$insert_usuarios))
 			{
-					header("Location: cadastro_prova.php");
+					header("Location: home.php");
 			}
 		break; 
 		default:

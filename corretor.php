@@ -5,13 +5,32 @@
 <title>SUBMIT</title>
 <?php
 	$permicao_pagina=2;
-	include('security.php');
+	include('seguranca.php');
 	include('conect.php');
 ?>
 </head>
 <body>
+<ol>
+    <li><p>Acesso Livre</p></br>
+    	<ul>
+            <li><a href="login.php">Login</a></li>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="provas.php">Provas</a></li>
+            <li><a href="logout.php">Logout</a></li>
+           
+        </ul>
+    </li>
+	<li><p></p>Acesso Restrito</br>
+    	<ul>
+    	 	<li><a href="cadastro_prova.php">Cadastro Provas</a></li>
+            <li><a href="cadastro_questoes.php">Cadastro Questões</a></li>
+            <li><a href="cadastro_usuario.php">Cadastro Usuarios</a></li>
+            <li><a href="corretor.php">Corretor</a></li>
+    	</ul>
+    </li>
+</ol></br>
 <?php
-	$select_envios=("SELECT * FROM envios WHERE nota = -1 ORDER BY hora_envio DESC LIMIT 1");
+	$select_envios=("SELECT * FROM envios WHERE nota = -1 ORDER BY hora_envio ASC LIMIT 1");
 	$sql=mysqli_query($conexao,$select_envios);	
 	$row = mysqli_num_rows($sql);
 	if($row)

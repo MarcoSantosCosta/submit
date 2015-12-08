@@ -19,6 +19,7 @@
 		session_start();
 		$_SESSION['senha_prova']=$prova->senha;
 		$_SESSION['code_prova']=$prova->code;
+		$_SESSION['qtd_questoes']=$prova->qtd_questoes;		
 		$_SESSION['data']=$prova->data;
 		$_SESSION['hora_inicio']=$prova->hora_inicio;
 		$_SESSION['hora_fim']=$prova->hora_fim;
