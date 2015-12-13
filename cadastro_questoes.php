@@ -19,16 +19,13 @@
 	<div class="container-fluid">
     	<div class="row">
         	<div id="form">
+                <h1>Cadastro de Provas</h1>
                 <form name="cadastro_questões" method="post" action="cadastros.php">
                     <input type="hidden" name="code" value="2">
-                    <label>Senha Prova: </label>
-                    <input type="text" name="senha_prova"></br>
-                    <label>Enunciado: </label>
-                    <input type="text" name="enunciado"></br>
-                    <label>Exemplo de Entrada: </label>
-                    <input type="text" name="exemplo_in"></br>
-                    <label>Exemplo de Saida: </label>
-                    <input type="text" name="exemplo_out"></br> 
+                    <input type="text" name="senha_prova" placeholder="Enunciado: "></br>
+                    <input type="text" name="enunciado" placeholder="Senha Prova: "></br>
+                    <input type="text" name="exemplo_in" placeholder="Exemplo de Entrada: "></br>
+                    <input type="text" name="exemplo_out" placeholder="Exemplo de Saida: "></br> 
                     <input type="submit" value="cadastrar">
                 </form>
 </body>
