@@ -27,7 +27,7 @@
 	<?php
     if($time >= $hora_fim)
         {
-            echo"Prova Finalizada";
+            echo"<h1>Prova Finalizada</h1>";
             exit;
         }
     ?>
