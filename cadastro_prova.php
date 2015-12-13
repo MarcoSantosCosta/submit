@@ -24,9 +24,9 @@
                     <label>Senha da prova: </label>
                     <input type="text" name="senha_prova"></br>
                     <label>Data da prova: </label>
-                    <input type="text" name="dia" size="1" maxlength="2"> /
-                    <input type="text" name="mes" size="1" maxlength="2"> /
-                    <input type="text" name="ano" size="4" maxlength="4"></br>
+                    <input type="text" name="dia" size="1" maxlength="2" style="width:10%"> /
+                    <input type="text" name="mes" size="1" maxlength="2" style="width:10%"> /
+                    <input type="text" name="ano" size="4" maxlength="4" style="width:10%"></br>
                     <label>Quantidade de Questões: </label>
                     <input type="text" name="qtd_questoes"><br>
                     <label>Hora Inicio:</label>
@@ -40,3 +40,8 @@
     </div>
 </body>
 </html>
+
+
+
+
+
