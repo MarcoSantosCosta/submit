@@ -23,9 +23,12 @@
 			$_SESSION['nome_grupo']=$user->nome_grupo;
 			$_SESSION['membros']=$user->membros;
 			$_SESSION['permicao']=$user->permicao;
-            echo"<script>allowedAccess()</script>";
-        }else{
-			echo"<script>accessDenied()</script>"; 
+            if($user->permicao>1)
+				header("Location: home.php");
+			else
+				header("Location: provas.php");
+			}else{
+				header("Location: login.php?try=1"); 
 		}
     ?>	
     </body>

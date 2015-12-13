@@ -1,12 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html5>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style_all.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="img/shortcut.png" >
+    <title>SUBMIT</title>
 </head>
 <body>
 <ol>
-    <li><p>Acesso Livre</p></br>
+    <li>Acesso Livre
     	<ul>
             <li><a href="login.php">Login</a></li>
             <li><a href="home.php">Home</a></li>
@@ -15,7 +20,7 @@
            
         </ul>
     </li>
-	<li><p></p>Acesso Restrito</br>
+	<li>Acesso Restrito</br>
     	<ul>
     	 	<li><a href="cadastro_prova.php">Cadastro Provas</a></li>
             <li><a href="cadastro_questoes.php">Cadastro Questões</a></li>
@@ -30,35 +35,38 @@
 	include('conect.php');
 	date_default_timezone_set('America/Sao_Paulo');
 	$date = date('Y-m-d');
-	$time = date('H:i:s');
-	//echo "data: $date Hora: $time<br>";
-	
+	$time = date('H:i:s');	
 	$select_provas = ("SELECT * FROM provas WHERE status = 1 and data = '$date'");
-	//$provas = $query->fetch_object();
-	//$row = mysqli_num_rows($query);
     $sql=mysqli_query($conexao,$select_provas);	
-		$row=mysqli_num_rows($sql);
+	$row=mysqli_num_rows($sql);
+	$provas_abertas=0;
 	if($row == 0)
 	{
 		echo"<h1>Nenhuma Prova abeta</h1><br>";
+					
 	}else
 	{
 		while($prova = $sql-> fetch_object())
 		{ 	
-			$hora_inicio=strtotime('$prova->hora_inicio');
-			if($time > $hora_inicio)
+			$hora_inicio=$prova->hora_inicio;
+			$hora_fim=$prova->hora_fim;
+			if($time >= $hora_inicio and $time <= $hora_fim)
 			{		
 				echo"Prova numer: $prova->code<br>
 				<form name='valida_prova' method='post' action='autenticacao_prova.php'>
 					<label>Digite a senha para acessar: </label>
 					<input type='text' name='senha_prova'>
-					<input type='hidden' name='code_prova' value='$prova->code'>
-					</input>
+					
+					HIDDEN(
+					<input type='text' class='hidden' name='code_prova' value='$prova->code'>
+					)
 					<input type='submit' value='acessar'>
 				<form><br><br>";
-			}else{
-			echo "tem prova hoje mas não agora";
+				$provas_abertas++;
 			}
+		}if($provas_abertas==0)
+		{
+			echo"<h1>Nenhuma Prova abeta nesse horario</h1><br>";
 		}
 	}
 	?>

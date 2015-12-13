@@ -1,38 +1,40 @@
 <!DOCTYPE html5>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script type="text/javascript" src="js/redirect.js"></script>
 
-<title>SUBMIT</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <link href="css/style_all.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="img/shortcut.png" >
+    <title>SUBMIT</title>
 </head>
 <body>
-<ol>
-    <li><p>Acesso Livre</p></br>
-    	<ul>
-            <li><a href="login.php">Login</a></li>
-            <li><a href="home.php">Home</a></li>
-            <li><a href="provas.php">Provas</a></li>
-           
-        </ul>
-    </li>
-	<li><p></p>Acesso Restrito</br>
-    	<ul>
-    	 	<li><a href="cadastro_prova.php">Cadastro Provas</a></li>
-            <li><a href="cadastro_questoes.php">Cadastro Questões</a></li>
-            <li><a href="cadastro_usuario.php">Cadastro Usuarios</a></li>
-            <li><a href="corretor.php">Corretor</a></li>
-    	</ul>
-    </li>
-</ol></br>
+	<div class="container-fluid">
+    	<div class="row">
+        	<div id="form"  style="height:350px;">
+            <img src="img/Logo3.png" alt="Logo da plataforma SUBMIT" class="logo" >
+            <br><br><br>
+            <form name="login" method="post" action="autenticacao_usuario.php" class="form">
+                <input type="text" name="login"  id="campo_form" placeholder="Usuário"></br>
+                <input type="password" name="senha" id="campo_form" placeholder="Senha" ></br>
+                <p style="margin-left:10%"><a href="cadastro_usuario.php">Faça seu cadastro!</a></p>
+                <input type="submit" value="Entrar" name="submit" class="btn" style="margin-left:78%;">      
+				<?php
+					if(isset($_GET['try']))
+					{
+						$try=$_GET['try'];
+						echo"<p style='color:#f00; margin-left:35%; float:left' >Login ou senha invalido</p>";		
+					}else
+					{
+						echo"<p style='color:#f00; margin-left:35%' ></p>";			
+					}
+				?>
+        	    </form>
+			</div>
+		</div>
+	</div>
 
-	<form name="login" method="post" action="autenticacao_usuario.php">
-    	<label>Login: </label>
-		<input type="text" name="login"></br>
-        <label>Senha: </label>
-        <input type="password" name="senha"></br>
-        <input type="submit" value="login" name="submit">      
-    </form>
 </body>
 </html>

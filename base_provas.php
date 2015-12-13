@@ -1,70 +1,67 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<?php
-	$permicao_pagina=0;
-	include('seguranca.php');
-	include('conect.php');	
-	$code_prova = $_SESSION['code_prova'];
-	$code_usuario = $_SESSION['code_usuario'];
+<!DOCTYPE html5>
+<html>
 
-?>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>SUBMIT</title>
-<script type="text/javascript" src="js/notas.js"></script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style_all.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="img/shortcut.png" >
+    <script type="text/javascript" src="includes/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="includes/refresh_notas.js"></script>
+    <title>SUBMIT</title>
+	<?php
+		$permicao_pagina=0;
+		include('seguranca.php');
+		include('conect.php');	
+		$hora_fim=$_SESSION['hora_fim'];
+		$code_prova = $_SESSION['code_prova'];
+		$code_usuario = $_SESSION['code_usuario'];
+		date_default_timezone_set('America/Sao_Paulo');
+		$date = date('Y-m-d');
+		$time = date('H:i:s');
+	?>
 </head>
 <body>
-<h1>Base Provas</h1>
-<ol>
-    <li>Acesso Livre
-    	<ul>
-            <li><a href="login.php">Login</a></li>
-            <li><a href="home.php">Home</a></li>
-            <li><a href="provas.php">Provas</a></li>
-            <li><a href="logout.php">Logout</a></li>
-           
-        </ul>
-    </li>
-	<li>Acesso Restrito</br>
-    	<ul>
-    	 	<li><a href="cadastro_prova.php">Cadastro Provas</a></li>
-            <li><a href="cadastro_questoes.php">Cadastro Questões</a></li>
-            <li><a href="cadastro_usuario.php">Cadastro Usuarios</a></li>
-            <li><a href="corretor.php">Corretor</a></li>
-    	</ul>
-    </li>
-</ol>
-<div id="result">
-Aqui estão as notas:</br>
-<?php
-include('notas.php');
-?>
-</br>
-</div>
-<?php
-	$select_prova="SELECT * from questoes WHERE chave_prova = $code_prova";
-	$sql=mysqli_query($conexao,$select_prova);
-	$cont=1;
-	echo"Code Prova: $code_prova<br><br>";
-	while($questao=$sql->fetch_object())
-	{
-		
-		echo"<strong>$cont.</strong> $questao->enunciado <br>
-		<strong>Exemplo de entrada:</strong>
-		$questao->exemplo_entrada<br>
-		<strong>Exemploe de saida:</strong>
-		$questao->exemplo_saida<br><br>
-		<form name='envio_questao' method='post' action='submeter_questao.php'>
-		<input type='text' name='code_questao' value='$questao->code'><br>
-		<input type='text' name='posicao' value='$cont'><br>
-		<textarea name='questao' cols='75' rows='10'></textarea><br>
-		</input>
-		<input type='submit' value='Enviar'>
-		</form>
-		<br><br>";
-		$cont++;
-	}	
-?>
-
+	<?php
+    if($time >= $hora_fim)
+        {
+            echo"Prova Finalizada";
+            exit;
+        }
+    ?>
+    <div id="result">
+        <h3>NOTAS:</h3></br>        
+        
+        <div id="nota">
+        </div>
+    </div>
+    </br>
+    </div>
+    <?php
+        $select_prova="SELECT * from questoes WHERE chave_prova = $code_prova";
+        $sql=mysqli_query($conexao,$select_prova);
+        $cont=1;	
+        echo"Code Prova: $code_prova<br><br>";
+        while($questao=$sql->fetch_object())
+        {
+            
+            echo"<strong>$cont.</strong> $questao->enunciado <br>
+            <strong>Exemplo de entrada:</strong>
+            $questao->exemplo_entrada<br>
+            <strong>Exemploe de saida:</strong>
+            $questao->exemplo_saida<br><br>
+			<form name='envio_questao' method='post' action='submeter_questao.php'>
+				<textarea name='questao' cols='75' rows='10'></textarea><br></input>
+				<input class='hidden' type='text' name='code_prova' value='$code_prova' class='hidden'></input>
+				<input class='hidden' type='text' name='code_questao' value='$questao->code' class='hidden'></input>
+				<input class='hidden' type='text' name='posicao' value='$cont' class='hidden'></input>
+           		<input type='submit' value='Enviar'></input>
+            </form>
+            <br><br>";
+            $cont++;
+        }	
+    ?>
 </body>
 </html>

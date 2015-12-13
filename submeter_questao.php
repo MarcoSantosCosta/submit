@@ -5,11 +5,11 @@
 	$date = date('Y-m-d');
 	$time = date('H:i:s');
 	$chave_usuario=$_SESSION["code_usuario"];
-	$chave_prova=$_SESSION["code_prova"];
+	$chave_prova=$_POST["code_prova"];
 	$chave_questao=$_POST['code_questao'];
 	$posicao=$_POST['posicao'];
-
 	$envio=$_POST['questao'];
+	
 	$select=("SELECT * from envios WHERE chave_usuario = '$chave_usuario' and chave_prova='$chave_prova' and chave_questao = '$chave_questao'");
 	if($sql=mysqli_query($conexao,$select))
 	{
@@ -23,11 +23,10 @@
 	if($qtd_envios <= 2)
 	{
 		$insert=("INSERT into envios values(null,$chave_usuario,$chave_prova,$chave_questao,'$envio',$posicao,$qtd_envios,'$time',-1)");			
-		if(!mysqli_query($conexao,$insert))
+		if(mysqli_query($conexao,$insert))
 		{
-			echo "Deu Ruim";
-		}
-		echo"$qtd_envios<br>";  
+			header("Location: base_provas.php");
+		} 
 	}else
 	{
 		echo "Numero maximo de envio";
