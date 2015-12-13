@@ -6,19 +6,28 @@ body
 	padding:0 0 0 0;
 	background:url(../img/background.jpg);
 }
+/*Classes*/
 .logo
 {	
 	width:85%;
 	margin-left:8%;
 	margin-top:1%;
 }
+.center
+{
+	width:80%;
+	height:50px;
+	background:#f00;
+	margin-left:10%;
+}	
+/*^------------------------------^*/
 /*Header*/
 #header
 { 
 	margin: 0 0 0 0;
 	width:100%;
 	height:50px;
-	background:#333se;
+	background:#333;
 	
 }
 /*^---------------------^*/
@@ -39,7 +48,8 @@ body
 #campo_form
 {
 	width:80%;
-	height:10%;
+	height:33px;
 	margin-left:10%;
 }
+
 /*^---------------------------------^*/

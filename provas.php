@@ -14,7 +14,8 @@
 	<div class="container-fluid" style="margin:0; padding:0;">
     	<div class="row" style="margin:0; padding:0;">
             <div id="header">
-        		
+            	<div class="center">
+                </div>        		
             </div>
         </div>	
 			<?php

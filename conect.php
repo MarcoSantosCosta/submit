@@ -1,5 +1,5 @@
 ﻿<?php
- $conexao =mysqli_connect('localhost', 'root','1234', 'submit');
+ $conexao =mysqli_connect('localhost', 'root','', 'submit');
    if($conexao)
    echo"<h1></h1>";
    else 
