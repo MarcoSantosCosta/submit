@@ -1,6 +1,5 @@
 <!DOCTYPE html5>
 <html>
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,18 +10,32 @@
     <title>SUBMIT</title>
 </head>
 <body>
+
+<div style="position:fixed; opacity:0;">
+<?php
+        $permicao_pagina=1;
+		include('seguranca.php');
+?>
+</div>
 	<div class="container-fluid" style="margin:0; padding:0;">
     	<div class="row" style="margin:0; padding:0;">
             <div id="header">
-            	<div class="center">
-                </div>        		
+            	<div >
+                	<img src="img/Logo3.png" id="logo_header">
+                </div>
+                <div id="dados_header">
+                	<?php 
+						
+						$nome_grupo=$_SESSION['nome_grupo'];
+						echo"<strong style='margin-right:10%'>Nome do Grupo: $nome_grupo</strong>";
+					?>
+                    <a href="logout.php">(Sair)</a>
+                </div>       		
             </div>
         </div>	
 			<?php
-				
-				$permicao_pagina=1;
-				include('seguranca.php');
-				include('conect.php');
+			
+				include('conect.php');    
 				date_default_timezone_set('America/Sao_Paulo');
 				$date = date('Y-m-d');
 				$time = date('H:i:s');	
@@ -32,31 +45,42 @@
 				$provas_abertas=0;
 				if($row == 0)
 				{
-					echo"<h1>Nenhuma Prova abeta</h1><br>";
+					echo"
+						<div id='campo_prova' style='width:80%; heigth: auto; margin-top:1%;margin-left:10%;'>
+							<h1 align='center' style='color:#0088cc'>Nenhuma Prova aberta nesse horário.</h1>
+						</div>";
 								
 				}else
 				{
+				echo"<div class='center'>";
 					while($prova = $sql-> fetch_object())
 					{ 	
 						$hora_inicio=$prova->hora_inicio;
 						$hora_fim=$prova->hora_fim;
 						if($time >= $hora_inicio and $time <= $hora_fim)
 						{		
-							echo"Prova numer: $prova->code<br>
-							<form name='valida_prova' method='post' action='autenticacao_prova.php'>
-								<label>Digite a senha para acessar: </label>
-								<input type='text' name='senha_prova'>
-								
-								HIDDEN(
-								<input type='text' class='hidden' name='code_prova' value='$prova->code'>
-								)
-								<input type='submit' value='acessar'>
-							<form><br><br>";
+							
+							echo"
+							<div id='campo_prova'>
+								<form name='valida_prova' method='post' id='form_prova'action='autenticacao_prova.php'>
+									<label style='color:#0088cc;'><strong>Prova numero:</strong> $prova->code</label>
+									<input type='text' name='senha' style='height:30px; float:left;' placeholder='Digite a senha para acessar'/>
+									<input type='submit' value='Acessar' class='btn' style='float:left'><br><br>
+									<label style='color:#0088cc; display:inline; float:left;'><strong>Inicio: </strong> $prova->hora_inicio </label>
+									<label style='color:#0088cc; display:inline; float:left; margin-left:2%'><strong>Fim: </strong> $prova->hora_fim</label>
+									<input type='text' class='hidden' name='code_prova' value='$prova->code'>
+								</form>
+							</div>";
 							$provas_abertas++;
 						}
-					}if($provas_abertas==0)
+					}
+					echo"</div>";
+					if($provas_abertas==0)
 					{
-						echo"<h1>Nenhuma Prova abeta nesse horario</h1><br>";
+						echo"
+						<div id='campo_prova' style='width:80%; heigth: auto; margin-top:5%;margin-left:10%;'>
+							<h1 align='center' style='color:#0088cc'>Nenhuma Prova aberta nesse horário.</h1>
+						</div>";
 					}
 				}
 			?>

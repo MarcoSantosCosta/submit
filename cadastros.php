@@ -1,3 +1,15 @@
+<!DOCTYPE html5>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style_all.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="img/shortcut.png" >
+    <title>SUBMIT</title>
+</head>
+<body>
 <?php
 	include("conect.php");	
 	$code=$_POST['code'];
@@ -19,14 +31,22 @@
    			$data_prova=$ano.$_POST["mes"].$_POST["dia"];
 			$hora_inicio=$_POST["hora_inicio"];	
 			$hora_fim=$_POST["hora_fim"];
-			echo"$ano";
-			$insert_provas="INSERT into  provas values(null,'$senha_prova',$qtd_questoes,'$data_prova','$hora_inicio','$hora_fim',1)";
-			if(mysqli_query($conexao,$insert_provas))
+			$select_provas="SELECT * from provas WHERE senha = '$senha_prova'";
+			$senhas_iguais=mysqli_query($conexao,$select_provas);
+			$qtd_senhas_iguais=mysqli_num_rows($senhas_iguais);
+			if($qtd_senhas_iguais == 0)
 			{
-				header("Location: cadastro_prova.php");
-				exit;
-			}else{
-				echo"Ocorreu algum erro!";
+				$insert_provas="INSERT into  provas values(null,'$senha_prova',$qtd_questoes,'$data_prova','$hora_inicio','$hora_fim',1)";
+				if(mysqli_query($conexao,$insert_provas))
+				{
+					header("Location: cadastro_questoes.php?&senha_prova=$senha_prova");
+					exit;
+				}else{
+						header("Location: cadastro_prova.php?erro=1");
+					}
+			}else
+			{	
+				header("location: cadastro_prova.php?erro=2");
 			}
 		break;
 		case 2://Cadastros questões
@@ -34,7 +54,7 @@
 			$enunciado=$_POST["enunciado"];
 			$exemplo_in=$_POST["exemplo_in"];
 			$exemplo_out=$_POST["exemplo_out"]; 
-			$select="SELECT code from provas WHERE senha = '$senha_prova'";
+			$select="SELECT * from provas WHERE senha = '$senha_prova'";
 			$sql=mysqli_query($conexao,$select);
 			$prova=$sql->fetch_object();
 			$row=mysqli_num_rows($sql);
@@ -45,13 +65,14 @@
 				$insert_questoes="INSERT into  questoes values(null,'$code_prova','$enunciado','$exemplo_in','$exemplo_out')";
 				if(mysqli_query($conexao,$insert_questoes))			
 				{	
-					header("Location: cadastro_questoes.php");
+					
+					header("Location: cadastro_questoes.php?result=0&$senha_prova");
 					exit;
 				}else{
-					echo"Algum campo inválido";
+					header("Location: cadastro_questoes.php?result=1&$senha_prova");
 				}
 			}else{
-				echo"senha inesistente";
+				header("Location: cadastro_questoes.php?result=2&$senha_prova");
 			}
 		break;
 		case 3://Cadastros Usuarios
@@ -71,3 +92,5 @@
 			
 	}
 ?>
+</body>
+</html>

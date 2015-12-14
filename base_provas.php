@@ -11,10 +11,15 @@
     <script type="text/javascript" src="includes/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="includes/refresh_notas.js"></script>
     <title>SUBMIT</title>
+	<div style="position:fixed; opacity:0;">
 	<?php
 		$permicao_pagina=0;
 		include('seguranca.php');
-		include('conect.php');	
+		include('conect.php');
+		if(!isset($_SESSION['senha_prova']))
+		{
+			header('Location: provas.php');
+		}
 		$hora_fim=$_SESSION['hora_fim'];
 		$code_prova = $_SESSION['code_prova'];
 		$code_usuario = $_SESSION['code_usuario'];
@@ -22,46 +27,63 @@
 		$date = date('Y-m-d');
 		$time = date('H:i:s');
 	?>
+    </div>
 </head>
 <body>
-	<?php
-    if($time >= $hora_fim)
-        {
-            echo"<h1>Prova Finalizada</h1>";
-            exit;
-        }
-    ?>
-    <div id="result">
-        <h3>NOTAS:</h3></br>        
-        
-        <div id="nota">
+		<div class="container-fluid" style="margin:0; padding:0;">
+    	<div class="row" style="margin:0; padding:0;">
+            <div id="header">
+            	<div >
+                	<img src="img/Logo3.png" id="logo_header">
+                </div>
+                <div id="dados_header">
+                	<?php 
+						
+						$nome_grupo=$_SESSION['nome_grupo'];
+						echo"<strong style='margin-right:10%'>Nome do Grupo: $nome_grupo</strong>";
+					?>
+                    <a href="logout.php">(Sair)</a>
+                </div>       		
+            </div>
         </div>
     </div>
-    </br>
+    <div id="result">        
+    	<?php include('notas.php');?>
     </div>
-    <?php
-        $select_prova="SELECT * from questoes WHERE chave_prova = $code_prova";
-        $sql=mysqli_query($conexao,$select_prova);
-        $cont=1;	
-        echo"Code Prova: $code_prova<br><br>";
-        while($questao=$sql->fetch_object())
-        {
-            
-            echo"<strong>$cont.</strong> $questao->enunciado <br>
-            <strong>Exemplo de entrada:</strong>
-            $questao->exemplo_entrada<br>
-            <strong>Exemploe de saida:</strong>
-            $questao->exemplo_saida<br><br>
-			<form name='envio_questao' method='post' action='submeter_questao.php'>
-				<textarea name='questao' cols='75' rows='10'></textarea><br></input>
-				<input class='hidden' type='text' name='code_prova' value='$code_prova' class='hidden'></input>
-				<input class='hidden' type='text' name='code_questao' value='$questao->code' class='hidden'></input>
-				<input class='hidden' type='text' name='posicao' value='$cont' class='hidden'></input>
-           		<input type='submit' value='Enviar'></input>
-            </form>
-            <br><br>";
-            $cont++;
-        }	
+        <?php
+        if($time >= $hora_fim)
+		{
+			echo"<h1>Prova Finalizada</h1>";
+			exit;
+			}else{
+			$select_prova="SELECT * from questoes WHERE chave_prova = $code_prova";
+			$sql=mysqli_query($conexao,$select_prova);
+			$cont=1;	
+			while($questao=$sql->fetch_object())
+			{  
+				echo" 
+					<div id='perguntas'>
+					<strong>Questão $cont.</strong><p>$questao->enunciado </p>
+					
+						<strong>Exemplo de entrada:</strong>
+						<p>$questao->exemplo_entrada</p>
+					
+						<strong>Exemploe de saida:</strong>
+						<p>$questao->exemplo_saida</p>
+					
+					<form name='envio_questao' method='post' action='submeter_questao.php'>
+						<textarea name='questao' id='resposta' ></textarea><br></input>
+						<input class='hidden' type='text' name='code_prova' value='$code_prova' class='hidden'></input>
+						<input class='hidden' type='text' name='code_questao' value='$questao->code' class='hidden'></input>
+						<input class='hidden' type='text' name='posicao' value='$cont' class='hidden'></input>
+						<input type='submit' value='Enviar' class='btn'></input>
+					</form>
+					</div><br>";
+				
+				$cont++;
+			}	
+		}
     ?>
+    </div>
 </body>
 </html>

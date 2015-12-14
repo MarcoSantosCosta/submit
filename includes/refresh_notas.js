@@ -1,7 +1,7 @@
-function test(){
+function refresh_notas(){
 	$.ajax({
 		url:"notas.php",
 		cache: false})
-		.done(function(html){$(nota).html(html);})
+		.done(function(html){$(result).html(html);})
 }
-setInterval('test()', 2000);
+setInterval('refresh_notas()', 2000);

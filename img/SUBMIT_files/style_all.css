@@ -1,0 +1,93 @@
+@charset "utf-8";
+/* CSS Document */
+body
+{
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+	background:url(../img/background.jpg);
+}
+/*Classes*/
+.logo
+{	
+	width:85%;
+	margin-left:8%;
+	margin-top:1%;
+}
+.center
+{
+	width:80%;
+	height:50px;
+	/*background:#f00;*/
+	margin-left:10%;
+	
+}	
+/*^------------------------------^*/
+/*Header*/
+#header
+{ 
+	margin: 0 0 0 0;
+	width:100%;
+	height:60px;
+	background:#eee;
+	-webkit-box-shadow:inset 0 -5px 20px 5px #fff;
+	box-shadow:inset 0 -5px 20px 	5px #fff;
+}
+#logo_header
+{
+	
+	height:40px;
+	margin-top:10px;
+	margin-left:5%;
+	float:left;
+}
+#dados_header
+{
+	height:40px;
+	line-height:60px;
+	margin-right:5%;
+	float:right;
+	color:#0088cc;
+}
+/*^---------------------^*/
+/*Formularios*/
+#form
+{
+	background:#fff;
+	border-radius:5px;
+		moz-border-radius:5px;
+		webkit-border-radius:5px;
+		padding:1%;
+	width:40%;
+	margin-left:30%;
+	margin-top:10%;
+	-webkit-box-shadow: -2px -2px 3px 3px #C7C7C7;
+	box-shadow: -2px -2px 3px 3px #C7C7C7;
+}
+#form label
+{
+	color:#0088cc;
+	margin-left:10%;
+}
+#campo_form
+{
+	width:80%;
+	height:33px;
+	margin-left:10%;
+}
+
+/*^---------------------------------^*/
+#campo_prova
+{
+	background:#fff;
+	border-radius:5px;
+	moz-border-radius:5px;
+	webkit-border-radius:5px;
+	padding:1%;
+	width:26%;
+	height:100px;
+	float: left;
+	margin-left:4%;
+	-webkit-box-shadow: -2px -2px 3px 3px #C7C7C7;
+	box-shadow: -2px -2px 3px 3px #C7C7C7;
+	
+}

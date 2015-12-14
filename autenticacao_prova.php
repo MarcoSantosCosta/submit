@@ -1,9 +1,9 @@
 <?php
-	
 	include("conect.php");
-	$senha_prova=$_POST["senha_prova"];
-	$code=$_POST["code_prova"];
-	$select="SELECT * FROM provas WHERE senha = '$senha_prova' ";
+	$senha_prova=$_POST["senha"];
+	$code_prova=$_POST["code_prova"];
+	echo"$senha_prova";
+	$select="SELECT * FROM provas WHERE senha = '$senha_prova' and code='$code_prova'";
 	$sql=mysqli_query($conexao,$select);
 	$prova= $sql->fetch_object();
 	$row = mysqli_num_rows($sql);
@@ -19,7 +19,7 @@
 		$_SESSION['status']=$prova->status;
 		header("Location: base_provas.php");
 	}else{
-		header("Location: provas.php?$try=1");
+		header("Location: provas.php");
 		exit;
 	}
 ?> 	
