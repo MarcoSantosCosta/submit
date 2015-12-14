@@ -26,7 +26,7 @@
                     <input type="text" name="senha_prova" id="campo_form" ></br>
                     <label>Data da prova: </label>
                     <input type="text" name="dia" id="campo_form" size="1" maxlength="2" placeholder="Dia" > /
-                    <input type="text" name="mes" id="campo_form" size="1" maxlength="2" placeholder="Mes" > /
+                    <input type="text" name="mes" id="campo_form" size="1" maxlength="2" placeholder="Mês" > /
                     <input type="text" name="ano" id="campo_form" size="4" maxlength="4" placeholder="Ano" ></br>
                     <label>Quantidade de Questões: </label>
                     <input type="text" name="qtd_questoes" id="campo_form"><br>

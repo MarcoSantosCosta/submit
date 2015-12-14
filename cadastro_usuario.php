@@ -14,16 +14,16 @@
 	<div class="container-fluid">
     	<div class="row">
         	<div id="form" style="height:350px">
-                <h2 style="margin-left:10%">Faça seu cadastro!</h2>
+                <h2 style="margin-left:10%">Faça seu cadastro</h2>
                 <br>
                 <form name="cadastro_usuarios" method="post" action="cadastros.php"  >
                     <input type="hidden" name="code" value="3"q>
-                    <input type="text" name="login_new" id="campo_form" placeholder="Usuário"></br>
-                    <input type="password" name="password_new" id="campo_form" placeholder="Senha"></br>
-                    <input type="text" name="nome_grupo" id="campo_form" placeholder="Nome do Grupo"></br>
-                    <input type="text" name="membros" id="campo_form" placeholder="Nome dos membros"></br>
+                    <input type="text" name="login_new" id="campo_form" id="campo_form" placeholder="Usuário"></br>
+                    <input type="password" name="password_new" id="campo_form" id="campo_form"placeholder="Senha"></br>
+                    <input type="text" name="nome_grupo" id="campo_form" id="campo_form" placeholder="Nome do Grupo"></br>
+                    <input type="text" name="membros" id="campo_form" id="campo_form" placeholder="Nome dos membros"></br>
                      <p style="margin-left: 10%"><a href="login.php">Voltar</a></p>
-                    <input type="submit" value="Cadastrar" style="margin-left:73%;" >
+                    <input type="submit" value="Cadastrar" style="margin-left:73%;" class="btn" >
                     <label></label>            
                 </form>
             </div>
