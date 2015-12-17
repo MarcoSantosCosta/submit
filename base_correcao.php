@@ -63,9 +63,10 @@
 				</form>";
 		}else
 		{
-			echo"<h2 align='center'>Nenhum exercicio agurdando correção</h2>";
+			echo"<h2 align='center'>Nenhum exercicio aguardando correção</h2>";
 		}
     ?>
     </div>
+    <?php include('fotter.php');?>
 </body>
 </html>

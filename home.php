@@ -43,5 +43,6 @@
 	$permicao=$_SESSION['permicao'];
 		
 ?>
+<?php include('fotter.php');?>
 </body>
 </html>

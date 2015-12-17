@@ -135,6 +135,7 @@
 		}
 		
 	?>
+	<?php include('fotter.php');?>
 </body>
 </html>
 

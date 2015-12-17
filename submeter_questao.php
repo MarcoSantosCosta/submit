@@ -12,7 +12,7 @@
     <title>SUBMIT</title>
 	<?php
 		echo"<div style='position:fixed; opacity:0;'>";
-		$permicao_pagina=2;
+		$permicao_pagina=1;
 		include('seguranca.php');
 		include('conect.php');
 		echo"</div>";

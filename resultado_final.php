@@ -36,11 +36,11 @@
 			exit;
 			}else{
 			$code_prova=$_POST['code_prova'];
-			$select_nota_final="SELECT * FROM notas WHERE chave_prova=$code_prova ORDER BY nota DESC ";
+			$select_nota_final="SELECT * FROM notas WHERE chave_prova=$code_prova ORDER BY tempo DESC ";
 			$sql_nota_final=mysqli_query($conexao,$select_nota_final);
 			$row=mysqli_num_rows($sql_nota_final);
 			$pos=1;
-			echo"<div id='grid_result' style='background:#0088cc; color:#fff; height:50px;	 '>";
+			echo"<div id='grid_result' style='background:#0088cc; color:#fff; height:100px;	 '>";
 			echo"<h3 style='margin:0; font-size:20pt;' align='center';><strong>Resultado Final</strong></h3><br>";
 			echo"</div>";
 			if($row!=0){
@@ -51,19 +51,20 @@
 					$usuario=$sql_usuario->fetch_object();
 					if($pos%2==0)
 					{
-						echo"<div id='grid_result' style='background:#0088cc; color:#fff'>";
+						echo"<div id='grid_result' style='background:#0088cc; color:#fff; height:100px;'>";
 					}else
 					{
-						echo"<div id='grid_result' style='background:#fff'>";
+						echo"<div id='grid_result' style='background:#fff; height:100px;'>";
 					}
-					echo"	<div style='float:left; padding-left:2%; width:32%; height:100%'><p><strong> $pos".'º'." Lugar- Grupo:</strong> $usuario->nome_grupo</p></div> 
-							<div style='float:left; width:32%;height:100%; text-align:center'><p><strong>Nota media: </strong>$nota_final->nota</p></div> 
-							<div style='float:left; padding-rigth:2%; width:32%;height:100%; text-align:right'><p><strong>Tempo medio: </strong>$nota_final->tempo</p></div>";			
+					echo"	<div style='float:left; padding-left:2%; width:50%; height:100%'><p><strong> $pos".'º'." Lugar- Grupo:</strong> $usuario->nome_grupo</p></div> 
+							<div style='float:left; width:22%;height:100%; text-align:center'><p><strong>Nota media: </strong>$nota_final->nota</p></div> 
+							<div style='float:left; padding-rigth:2%; width:22%; height:100%; text-align:right'><p><strong>Tempo medio: </strong>$nota_final->tempo</p></div>";			
 					echo"</div>";
 					$pos++;
 				}
 			}
 		}
 	?>
+	<?php include('fotter.php');?>
 </head>
 </body>
