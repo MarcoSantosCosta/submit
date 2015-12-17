@@ -24,7 +24,7 @@
 			$_SESSION['membros']=$user->membros;
 			$_SESSION['permicao']=$user->permicao;
             if($user->permicao>1)
-				header("Location: corretor.php");
+				header("Location: correcoes.php");
 			else
 				header("Location: provas.php");
 			}else{

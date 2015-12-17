@@ -36,43 +36,11 @@
                 }
             }
         ?>
-	<div class="container-fluid" style="margin:0; padding:0;">
-    	<div class="row" style="margin:0; padding:0;">
-            <div id="header">
-            	<div >
-                	<img src="img/Logo3.png" id="logo_header">
-                </div>
-                <div id="dados_header">
-                	<?php 
-						
-						$nome_grupo=$_SESSION['nome_grupo'];
-						echo"<strong style='margin-right:10%'>Nome do Grupo: $nome_grupo</strong>";
-					?>
-                    <a href="logout.php">(Sair)</a>
-                </div>       		
-            </div>
-        </div>
     </div>
-    <div class="navbar">
-        <div class="navbar-inner">
-            <ul class="nav" style="margin-left:5%">
-                <li class="divider-vertical"></li>
-                <li><a href="cadastro_prova.php">Cadastro Provas</a></li>
-                <li class="divider-vertical"></li>
-                <li><a href="cadastro_questoes.php">Cadastro Questões</a></li>
-                <li class="divider-vertical"></li>
-                <li><a href="corretor.php">Corretor</a></li>
-                <li class="divider-vertical"></li>
-                <li><a href="provas.php">Provas</a></li>
-                <li class="divider-vertical"></li>
-                <li><a href="">LINKS</a></li>
-                <li class="divider-vertical"></li>
-            </ul>
-        </div>
-    </div>
+    <?php include('header.php')?>
 	<div class="container-fluid">
     	<div class="row">
-        	<div id="form" style="margin-top:5%">
+        	<div id="form" style="margin-top:1%">
                 <form name="cadastro_prova" method="post" action="cadastros.php">
                 	<h2>Cadastro Prova</h2>
                     <input type="hidden" name="code" id="campo_form" value="1">

@@ -52,6 +52,7 @@
 		case 2://Cadastros questões
 			$senha_prova=$_POST["senha_prova"];
 			$enunciado=$_POST["enunciado"];
+			$peso=$_POST['peso'];
 			$exemplo_in=$_POST["exemplo_in"];
 			$exemplo_out=$_POST["exemplo_out"]; 
 			$select="SELECT * from provas WHERE senha = '$senha_prova'";
@@ -62,17 +63,17 @@
 			{
 				$code_prova=$prova->code;				
 				echo"Code prova: $code_prova Senha prova: $senha_prova";
-				$insert_questoes="INSERT into  questoes values(null,'$code_prova','$enunciado','$exemplo_in','$exemplo_out')";
+				$insert_questoes="INSERT into  questoes values(null,'$code_prova','$enunciado',$peso,'$exemplo_in','$exemplo_out')";
 				if(mysqli_query($conexao,$insert_questoes))			
 				{	
 					
-					header("Location: cadastro_questoes.php?result=0&$senha_prova");
+					header("Location: cadastro_questoes.php?result=0&senha_prova=$senha_prova");
 					exit;
 				}else{
-					header("Location: cadastro_questoes.php?result=1&$senha_prova");
+					header("Location: cadastro_questoes.php?result=1&senha_prova=$senha_prova");
 				}
 			}else{
-				header("Location: cadastro_questoes.php?result=2&$senha_prova");
+				header("Location: cadastro_questoes.php?result=2&senha_prova=$senha_prova");
 			}
 		break;
 		case 3://Cadastros Usuarios

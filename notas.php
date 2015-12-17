@@ -22,7 +22,16 @@
 		{
 			if($notas->nota != -1)
 			{
-				echo"<p align='left'>Questão$i: $notas->nota </p>";	
+				if($notas->nota == 0)
+				{
+					echo"<p align='left'>Questão$i: 0 </p>";	
+				}else if($notas->nota == 1)
+				{
+					echo"<p align='left'>Questão$i: 1 </p>";	
+				}else
+				{
+					echo"<p align='left'>Questão$i: 2 </p>";	
+				}
 			}else
 			{
 				echo"<p align='left'>Questão$i: Aguardando avaliação</p>";

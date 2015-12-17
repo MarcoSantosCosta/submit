@@ -20,7 +20,7 @@
 				{
 					echo"
                         <script>
-                            alert('Questão cadastrada com sucesso¹');	
+                            alert('Questão cadastrada com sucesso!');	
                         </script>
                     ";
 				}else if($_GET['result']==1)
@@ -52,41 +52,7 @@
 	</div>
 </head>
 <body>
-<div class="container-fluid" style="margin:0; padding:0;">
-    	<div class="row" style="margin:0; padding:0;">
-            <div id="header">
-            	<div >
-                	<img src="img/Logo3.png" id="logo_header">
-                </div>
-                <div id="dados_header">
-                	<?php 
-						
-						$nome_grupo=$_SESSION['nome_grupo'];
-						echo"<strong style='margin-right:10%'>Nome do Grupo: $nome_grupo</strong>";
-					?>
-                    <a href="logout.php">(Sair)</a>
-                </div>       		
-            </div>
-        </div>
-    </div>
-    <div class="navbar">
-        <div class="navbar-inner">
-            <ul class="nav" style="margin-left:5%">
-                <li class="divider-vertical"></li>
-                <li><a href="cadastro_prova.php">Cadastro Provas</a></li>
-                <li class="divider-vertical"></li>
-                <li><a href="cadastro_questoes.php">Cadastro Questões</a></li>
-                <li class="divider-vertical"></li>
-                <li><a href="corretor.php">Corretor</a></li>
-                <li class="divider-vertical"></li>
-                <li><a href="provas.php">Provas</a></li>
-                <li class="divider-vertical"></li>
-                <li><a href="">LINKS</a></li>
-                <li class="divider-vertical"></li>
-            </ul>
-        </div>
-    </div>
-
+    <?php include('header.php') ?>
 	<div class="container-fluid">
     	<div class="row">
             <div id="form_questoes">
@@ -97,6 +63,8 @@
                     <input type="hidden" name="code" value="2">
                     <label>Enunciado: </label>
                     <textarea name="enunciado" id="enunciado" ></textarea></br>
+                    <label>Peso da questão: </label>
+                    <input type="text" name="peso" id="campo_form" ></br>
                     <label>Exemplo de Entrada: </label>
                     <input type="text" name="exemplo_in" id="campo_form" ></br>
                     <label>Exemplo de Saida: </label>

@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style_all.css" rel="stylesheet" type="text/css">
+	<link href="css/style_all.css" rel="stylesheet" type="text/css">
     <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="img/shortcut.png" >
@@ -20,9 +20,9 @@
 		{
 			header('Location: provas.php');
 		}
-		$hora_fim=$_SESSION['hora_fim'];
 		$code_prova = $_SESSION['code_prova'];
 		$code_usuario = $_SESSION['code_usuario'];
+		$hora_fim=$_SESSION['hora_fim'];
 		date_default_timezone_set('America/Sao_Paulo');
 		$date = date('Y-m-d');
 		$time = date('H:i:s');
@@ -30,53 +30,60 @@
     </div>
 </head>
 <body>
-		<div class="container-fluid" style="margin:0; padding:0;">
-    	<div class="row" style="margin:0; padding:0;">
-            <div id="header">
-            	<div >
-                	<img src="img/Logo3.png" id="logo_header">
-                </div>
-                <div id="dados_header">
-                	<?php 
-						
-						$nome_grupo=$_SESSION['nome_grupo'];
-						echo"<strong style='margin-right:10%'>Nome do Grupo: $nome_grupo</strong>";
-					?>
-                    <a href="logout.php">(Sair)</a>
-                </div>       		
-            </div>
-        </div>
-    </div>
+	<?php include('header.php');?>
     <div id="result">        
     	<?php include('notas.php');?>
     </div>
         <?php
         if($time >= $hora_fim)
 		{
-			echo"<h1>Prova Finalizada</h1>";
+			echo"
+				<div id='perguntas'>
+					<h1>Prova Finalizada</h1>
+				</div>";
 			exit;
-			}else{
+		}else{
 			$select_prova="SELECT * from questoes WHERE chave_prova = $code_prova";
 			$sql=mysqli_query($conexao,$select_prova);
-			$cont=1;	
+			$cont=1; 	
 			while($questao=$sql->fetch_object())
 			{  
+				$select_questao=("SELECT * from envios WHERE chave_usuario = '$code_usuario' and chave_prova='$code_prova' and chave_questao = '$questao->code'");
+				if($sql_questao=mysqli_query($conexao,$select_questao))
+				{
+					$qtd_envios = mysqli_num_rows($sql_questao);
+					
+				}
 				echo" 
 					<div id='perguntas'>
-					<strong>Questão $cont.</strong><p>$questao->enunciado </p>
-					
-						<strong>Exemplo de entrada:</strong>
-						<p>$questao->exemplo_entrada</p>
-					
-						<strong>Exemploe de saida:</strong>
-						<p>$questao->exemplo_saida</p>
-					
-					<form name='envio_questao' method='post' action='submeter_questao.php'>
-						<textarea name='questao' id='resposta' ></textarea><br></input>
+					<h4 style='color:#0088cc'><strong>Questão $cont</strong></h4>
+					<strong>Peso: </strong>$questao->peso
+					<p>$questao->enunciado </p>
+					<strong>Exemplo de entrada:</strong>
+					<p>$questao->exemplo_entrada</p>
+					<strong>Exemplo de saida:</strong>
+					<p>$questao->exemplo_saida</p>					
+					<form name='envio_questao' method='post' action='submeter_questao.php'>";
+					if($qtd_envios < 3)
+					{
+						echo"<textarea name='questao' id='resposta' rows='2' ></textarea><br></input>
+						<input type='text' readonly='true' name='qtd_envios' value=' $qtd_envios/3' style='height:30px; width:45px; margin:5px 5% 0 5px; float:right'>
+						<input type='submit' value='Enviar' class='btn' style=' float:right;  margin:5px 0;'></input>";
+					}else
+					{
+						echo"
+							<h4 style='color:#0088cc'><strong></strong></h4>
+							<input   type='text' readonly='true' name='qtd_envios' value=' $qtd_envios/3' style='height:30px; width:45px; margin:5px 5% 0 5px; float:right'>";
+					}
+					echo"
 						<input class='hidden' type='text' name='code_prova' value='$code_prova' class='hidden'></input>
-						<input class='hidden' type='text' name='code_questao' value='$questao->code' class='hidden'></input>
-						<input class='hidden' type='text' name='posicao' value='$cont' class='hidden'></input>
-						<input type='submit' value='Enviar' class='btn'></input>
+						<div style='position:fixed; opacity:0;'>
+							<input class='hidden' type='text' name='code_questao' value='$questao->code'></input>
+							<input class='hidden' type='text' name='posicao' value='$cont'></input>
+							<input class='hidden' type='text' name='qtd_envios' value='$cont'></input>
+							<input class='hidden' type='text' name='qtd_envios' value='$questao->peso'></input>
+							
+						</div>
 					</form>
 					</div><br>";
 				

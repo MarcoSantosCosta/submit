@@ -17,74 +17,59 @@
 		include('seguranca.php');
 ?>
 </div>
-	<div class="container-fluid" style="margin:0; padding:0;">
-    	<div class="row" style="margin:0; padding:0;">
-            <div id="header">
-            	<div >
-                	<img src="img/Logo3.png" id="logo_header">
-                </div>
-                <div id="dados_header">
-                	<?php 
-						
-						$nome_grupo=$_SESSION['nome_grupo'];
-						echo"<strong style='margin-right:10%'>Nome do Grupo: $nome_grupo</strong>";
-					?>
-                    <a href="logout.php">(Sair)</a>
-                </div>       		
-            </div>
-        </div>	
-			<?php
-			
-				include('conect.php');    
-				date_default_timezone_set('America/Sao_Paulo');
-				$date = date('Y-m-d');
-				$time = date('H:i:s');	
-				$select_provas = ("SELECT * FROM provas WHERE status = 1 and data = '$date'");
-				$sql=mysqli_query($conexao,$select_provas);	
-				$row=mysqli_num_rows($sql);
-				$provas_abertas=0;
-				if($row == 0)
-				{
-					echo"
-						<div id='campo_prova' style='width:80%; heigth: auto; margin-top:1%;margin-left:10%;'>
-							<h1 align='center' style='color:#0088cc'>Nenhuma Prova aberta nesse horário.</h1>
-						</div>";
-								
-				}else
-				{
-				echo"<div class='center'>";
-					while($prova = $sql-> fetch_object())
-					{ 	
-						$hora_inicio=$prova->hora_inicio;
-						$hora_fim=$prova->hora_fim;
-						if($time >= $hora_inicio and $time <= $hora_fim)
-						{		
+<?php include('header.php')?>
+	<?php			
+			include('conect.php');    
+			date_default_timezone_set('America/Sao_Paulo');
+			$date = date('Y-m-d');
+			$time = date('H:i:s');	
+			$select_provas = ("SELECT * FROM provas WHERE status = 1 and data = '$date'");
+			$sql=mysqli_query($conexao,$select_provas);	
+			$row=mysqli_num_rows($sql);
+			$provas_abertas=0;
+			if($row == 0)
+			{
+				echo"
+					<div id='campo_prova' style='width:80%; heigth: auto; margin-top:1%;margin-left:10%;'>
+						<h1 align='center' style='color:#0088cc'>Nenhuma Prova aberta nesse horário.</h1>
+					</div>";
 							
+			}else
+			{
+			echo"<div class='center'>";
+				while($prova = $sql-> fetch_object())
+				{ 	
+					$hora_inicio=$prova->hora_inicio;
+					$hora_fim=$prova->hora_fim;
+					if($time >= $hora_inicio and $time <= $hora_fim)
+					{		
+						
 							echo"
 							<div id='campo_prova'>
 								<form name='valida_prova' method='post' id='form_prova'action='autenticacao_prova.php'>
 									<label style='color:#0088cc;'><strong>Prova numero:</strong> $prova->code</label>
-									<input type='text' name='senha' style='height:30px; float:left;' placeholder='Digite a senha para acessar'/>
+									<input type='password'  name='senha' style='height:30px; float:left;' placeholder='Digite a senha para acessar'/>
 									<input type='submit' value='Acessar' class='btn' style='float:left'><br><br>
 									<label style='color:#0088cc; display:inline; float:left;'><strong>Inicio: </strong> $prova->hora_inicio </label>
 									<label style='color:#0088cc; display:inline; float:left; margin-left:2%'><strong>Fim: </strong> $prova->hora_fim</label>
-									<input type='text' class='hidden' name='code_prova' value='$prova->code'>
+									<div style='position:fixed; opacity:0;''>
+										<input type='text' class='hidden' name='code_prova' value='$prova->code'>
+									</div>
 								</form>
 							</div>";
-							$provas_abertas++;
-						}
-					}
-					echo"</div>";
-					if($provas_abertas==0)
-					{
-						echo"
-						<div id='campo_prova' style='width:80%; heigth: auto; margin-top:5%;margin-left:10%;'>
-							<h1 align='center' style='color:#0088cc'>Nenhuma Prova aberta nesse horário.</h1>
-						</div>";
+						$provas_abertas++;
 					}
 				}
-			?>
-		</div>
-	</div>
+				echo"</div>";
+				if($provas_abertas==0)
+				{
+					echo"
+					<div id='campo_prova' style='width:80%; heigth: auto; margin-top:5%;margin-left:10%;'>
+						<h1 align='center' style='color:#0088cc'>Nenhuma Prova aberta nesse horário.</h1>
+					</div>";
+				}
+			}
+		?>
+
 </body>
 </html>
