@@ -67,13 +67,13 @@
 					if($qtd_envios < 3)
 					{
 						echo"<textarea name='questao' id='resposta' rows='2' ></textarea><br></input>
-						<input type='text' readonly='true' name='qtd_envios' value=' $qtd_envios/3' style='height:30px; width:45px; margin:5px 5% 0 5px; float:right'>
+						<input type='text' readonly='true' name='qtd_envios' value='Tentativa $qtd_envios/3' style='height:30px; width:110px; margin:5px 5% 0 5px; float:right'>
 						<input type='submit' value='Enviar' class='btn' style=' float:right;  margin:5px 0;'></input>";
 					}else
 					{
 						echo"
-							<h4 style='color:#0088cc'><strong></strong></h4>
-							<input   type='text' readonly='true' name='qtd_envios' value=' $qtd_envios/3' style='height:30px; width:45px; margin:5px 5% 0 5px; float:right'>";
+							<h4 style='color:#0088cc'><strong>Numero de tentativas esgotado!</strong>
+							<input   type='text' readonly='true' name='qtd_envios' value='Tentativa: $qtd_envios/3' style='height:30px; width:110px; margin:5px 5% 0 5px; float:right'></h4>";
 					}
 					echo"
 						<input class='hidden' type='text' name='code_prova' value='$code_prova' class='hidden'></input>
@@ -82,10 +82,9 @@
 							<input class='hidden' type='text' name='posicao' value='$cont'></input>
 							<input class='hidden' type='text' name='qtd_envios' value='$cont'></input>
 							<input class='hidden' type='text' name='qtd_envios' value='$questao->peso'></input>
-							
 						</div>
 					</form>
-					</div><br>";
+					</div>";
 				
 				$cont++;
 			}	

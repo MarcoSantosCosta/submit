@@ -33,20 +33,26 @@
 			$_SESSION['code_correcao'] = $_POST['code_prova'];
 		}
 		$code_prova=$_SESSION['code_correcao'];
-		$select_envios=("SELECT * FROM envios WHERE nota = -1 and chave_prova = $code_prova ORDER BY hora_envio ASC LIMIT 1");
+		$select_envios=("SELECT * FROM envios WHERE nota = -1 and chave_prova = $code_prova and status != 1 ORDER BY hora_envio ASC LIMIT 1");
 		$sql_envios=mysqli_query($conexao,$select_envios);	
 		$row = mysqli_num_rows($sql_envios);
 		if($row)
 		{
 			$envio=$sql_envios->fetch_object();
+			$update_envios="UPDATE envios SET status=1 WHERE code = $envio->code";
+			mysqli_query($conexao,$update_envios);
 			$select_usuarios=("SELECT * FROM usuarios WHERE code = $envio->chave_usuario");
 			$sql_usuario=mysqli_query($conexao,$select_usuarios);
 			$usuario=$sql_usuario->fetch_object();
+			$select_questao="SELECT * FROM questoes WHERE code = $envio->chave_questao";
+			$sql_questao=mysqli_query($conexao,$select_questao);
+			$questao=$sql_questao->fetch_object();
 			echo"
 				<p><strong>Nome do grupo:</strong> $usuario->nome_grupo</p>
-				<p><strong>Numero:</strong> $envio->numero_envio</p>
-				<p><strong>Hora:</strong> $envio->hora_envio</p>
-				<p><strong>Code envio:</strong> $envio->code</p>
+				<p><strong>Numero envio:</strong> $envio->numero_envio</p>
+				<p><strong>Hora do envio:</strong> $envio->hora_envio</p>
+				<p><strong>Questao $envio->posicao</strong><p> 
+				<p>$questao->enunciado</p>
 				<form name='correcao' method='post' action='corretor.php'>
 					<label style='display:inline; float='left'><strong><p>Nota: </strong></label>
 					<input name='nota' type='submit' value='0' class='btn'>

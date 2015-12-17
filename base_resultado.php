@@ -36,6 +36,7 @@
 				<form name='resultado_final' method='post' action='resultado_final.php' >
 					<div style='position:fixed; opacity:0;' class='hidden'>
 						<input type='text'  name='code_prova' value='$code_prova'>
+						<input type='text'  name='hora_fim' value='$code_prova'>
 					</div>
 					<input type='submit'  value='Resultado Final' class='btn' style='margin-left:4%; '>
 				</form>

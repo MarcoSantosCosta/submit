@@ -49,7 +49,6 @@
 							<form name='valida_prova' method='post' id='form_prova'action='base_correcao.php'>
 								<label style='color:#0088cc;'><strong>Senha:</strong> $prova->senha</label>
 								<label style='color:#0088cc;'><strong>Data:</strong> $prova->data</label>
-								<label style='color:#0088cc;'><strong>Data:</strong> $prova->data</label>
 								<label style='color:#0088cc; display:inline; float:left;'><strong>Inicio: </strong> $prova->hora_inicio </label>
 								<label style='color:#0088cc; display:inline; float:left; margin-left:2%'><strong>Fim: </strong> $prova->hora_fim</label>
 								<input type='text' class='hidden' name='code_prova' value='$prova->code' style='height:30px; width:30%; float:right'>
