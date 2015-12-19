@@ -14,7 +14,6 @@
 		echo"<div style='position:fixed; opacity:0;'>";
 		$permicao_pagina=1;
 		include('seguranca.php');
-		include('conect.php');
 		echo"</div>";
 	?>
 </head>
@@ -22,10 +21,7 @@
 <body>
 <?php include('header.php') ?>
 <?php
-	include("conect.php");
-	$permicao_pagina=1;
-	include('seguranca.php');
-	date_default_timezone_set('America/Sao_Paulo');
+	$permicao_pagina=1;	date_default_timezone_set('America/Sao_Paulo');
 	$date = date('Y-m-d');
 	$time = date('H:i:s');
 	$hora_fim=$_SESSION['hora_fim'];
@@ -35,11 +31,11 @@
 	{
 		header("Location: base_provas.php");
 	}
-	if($time >= $hora_fim)
+	if($time > $hora_fim)
 	{
 			echo"
-				<div id='perguntas'>
-					<h1>A questão não foi enviada</h1>
+				<div id='perguntas' style='margin-left:12.5%'>
+					<h1 align='center'>A questão não foi enviada</h1>
 					<h2 align='center'>Prova Finalizada</h1>
 
 
